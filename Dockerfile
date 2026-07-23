@@ -40,9 +40,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy dependency files first (better Docker cache)
-COPY composer.json composer.lock ./
-COPY package*.json ./
+# Copy entire Laravel project
+COPY . .
 
 # Install PHP dependencies
 RUN composer install \
