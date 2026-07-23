@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Environment
+.env
+.env.*
+
+# Composer
+/vendor
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# Laravel cache/logs
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Tests (optional)
+tests/
