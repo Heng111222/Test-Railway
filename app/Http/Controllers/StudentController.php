@@ -31,7 +31,7 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'address' => 'required|max:255',
             'phone' => 'required|max:20',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
         ]);
 
         $image = null;
@@ -72,7 +72,7 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'address' => 'required|max:255',
             'phone' => 'required|max:20',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
         ]);
 
         $image = $student->image;
