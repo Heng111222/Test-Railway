@@ -31,7 +31,12 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'address' => 'required|max:255',
             'phone' => 'required|max:20',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'image' => [
+                'nullable',
+                'image',
+                'mimetypes:image/jpeg,image/png,image/gif,image/webp,image/bmp,image/svg+xml,image/avif',
+                'max:10240',
+            ],
         ]);
 
         $image = null;
@@ -72,7 +77,12 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'address' => 'required|max:255',
             'phone' => 'required|max:20',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'image' => [
+                'nullable',
+                'image',
+                'mimetypes:image/jpeg,image/png,image/gif,image/webp,image/bmp,image/svg+xml,image/avif',
+                'max:10240',
+            ],
         ]);
 
         $image = $student->image;
