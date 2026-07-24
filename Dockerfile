@@ -1,6 +1,5 @@
 FROM php:8.3-cli
 
-# ENV COMPOSER_ALLOW_SUPERUSER=1
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -39,9 +38,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# Working directory
 WORKDIR /var/www/html
 
-# Copy entire Laravel project
+# Copy project
 COPY . .
 
 # Install PHP dependencies
@@ -52,15 +52,16 @@ RUN composer install \
     --no-interaction
 
 # Install Node dependencies
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+RUN if [ -f package-lock.json ]; then \
+        npm ci; \
+    else \
+        npm install; \
+    fi
 
-# Copy application
-COPY . .
-
-# Build frontend
+# Build Vite assets
 RUN npm run build
 
-# Create Laravel directories
+# Create required Laravel directories
 RUN mkdir -p \
     storage/framework/cache \
     storage/framework/sessions \
@@ -68,15 +69,17 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache
 
-# Permissions
+# Set permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Create storage link (ignore if already exists)
+# Create storage symlink (ignore if already exists)
 RUN php artisan storage:link || true
 
+# Railway port
 EXPOSE 8080
 
-CMD php artisan config:cache --force && \
-    php artisan route:cache --force && \
-    php artisan view:cache --force && \
+# Start Laravel
+CMD php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
