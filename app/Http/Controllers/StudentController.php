@@ -35,7 +35,7 @@ class StudentController extends Controller
                 'nullable',
                 'image',
                 'mimetypes:image/jpeg,image/png,image/gif,image/webp,image/bmp,image/svg+xml,image/avif',
-                'max:10240',
+                'max:204800',
             ],
         ]);
 
@@ -81,7 +81,7 @@ class StudentController extends Controller
                 'nullable',
                 'image',
                 'mimetypes:image/jpeg,image/png,image/gif,image/webp,image/bmp,image/svg+xml,image/avif',
-                'max:10240',
+                'max:204800',
             ],
         ]);
 
